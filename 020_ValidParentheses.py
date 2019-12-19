@@ -7,27 +7,25 @@ Created on Sat Oct 19 01:07:29 2019
     
     
 class Solution(object):
-    def __init__(self):
-        self.Parenthesis = []
-    
-    def generateParenthesis(self, n):
+    def isValid(self, s):
         """
-        :type n: int
-        :rtype: List[str]
+        :type s: str
+        :rtype: bool
         """
-        return self.gParenthesis(n)
-                
-    def gParenthesis(self, n):
-        if n == 1:
-            self.Parenthesis.append(['()'])
-            return ['()']
-        elif len(self.Parenthesis) > n:
-            return self.Parenthesis[n]
-        else:
-            outList = list()
-            for parenthesis in self.gParenthesis(n-1):
-                for index in range(len(parenthesis)):
-                    outList.append(parenthesis[:index] + '()' + parenthesis[index:])
-        outList = list(set(outList))   
-        self.Parenthesis.append(outList)              
-        return outList
+        left  = ['{','[','(']
+        right = ['}',']',')']
+        
+        stack = []
+        
+        for c in s:
+            if c in left:
+                stack.append(c)
+            elif c in right:
+                if stack and left.index(stack[-1]) == right.index(c):
+                    stack.pop()
+                else:
+                    return False
+            else:
+                return False
+            
+        return not stack

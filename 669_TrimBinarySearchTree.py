@@ -27,7 +27,6 @@ class BinarySeachTree():
         self.levelList = []
         
     def creatBST(self, x):
-        
         root= binaryTree(x.pop(0))
         for i in x:
             self.insertValue(root, i)
@@ -56,17 +55,17 @@ class BinarySeachTree():
         return self.levelList
 
 #            
-#    def traversalTree(self, root, level):
-#        if len(self.levelList) <= level:
-#            self.levelList.append([root.val])
-#        else:
-#            self.levelList[level].append(root.val)
-#            
-#        if root.left:
-#            self.traversalTree(root.left, level+1)
-#        if root.right:
-#            self.traversalTree(root.right, level+1)
-
+    def traversalTree(self, root):
+#        if not isinstance(root, binaryTree):
+#            raise 'must be a binaryTree instance'
+        nodeQ = [root]
+        while(nodeQ):
+            node = nodeQ.pop(0)
+            print(node.val)
+            if node.left:
+                nodeQ.append(node.left)
+            if node.right:
+                nodeQ.append(node.right)
 
         
     def checkBalanced(self, root):
@@ -116,7 +115,13 @@ class BinarySeachTree():
         
 BST = BinarySeachTree()
 
-node = BST.creatBST([1])
+node = BST.creatBST([1,12,3,13,5,23,6,1234,7,4,16,43,87,76])
+
+
+BST.traversalTree(node)
+
+
+
 
 BST.checkTreeDepth(node)
 #BST.levelOrder(node)
